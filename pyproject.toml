@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chronoaudit"
+version = "0.1.0"
+description = "Timestamp forensics for trading data: detect DST bugs, vendor timestamp-convention mismatches, session anomalies, and cross-feed misalignment before they corrupt your backtest."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Ankur Desai" }]
+keywords = ["trading", "backtesting", "data-quality", "timestamps", "timezone", "DST", "OHLCV", "quant"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = [
+    "pandas>=2.1",
+    "numpy>=1.26",
+    "python-dateutil>=2.8",
+]
+
+[project.optional-dependencies]
+parquet = ["pyarrow>=14"]
+calendars = ["exchange_calendars>=4.5"]
+dev = ["pytest>=8", "exchange_calendars>=4.5", "pyarrow"]
+
+[project.scripts]
+chronoaudit = "chronoaudit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
